@@ -4,7 +4,7 @@ import { RoomComponent } from "./pages/room/room.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RoomComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

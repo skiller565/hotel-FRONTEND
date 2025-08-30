@@ -29,15 +29,15 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
       <td mat-cell *matCellDef="let row">
-          <button matButton="filled">
-            <span>Edit</span>
+        <div class="actions">
+          <button mat-mini-fab color="primary" matTooltip="Edit">
             <mat-icon>mode_edit</mat-icon>
           </button>
 
-          <button matButton="outlined" class="delete-button" >
-            <span>Delete</span>
+          <button mat-mini-fab color="primary delete" matTooltip="Delete">
             <mat-icon>delete</mat-icon>
           </button>
+        </div>
       </td>
     </ng-container>
 
