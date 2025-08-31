@@ -1,0 +1,19 @@
+<mat-dialog-content>
+    <mat-toolbar>
+        <span>Room Info</span>
+    </mat-toolbar>
+    <div class="example-container">
+        <mat-form-field>
+            <input matInput placeholder="Room Number" [(ngModel)]="room.number">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Room Type" [(ngModel)]="room.type">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Price" [(ngModel)]="room.price">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Available" [(ngModel)]="room.available">
+        </mat-form-field>
+    </div>
+</mat-dialog-content>

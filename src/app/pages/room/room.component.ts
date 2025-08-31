@@ -9,10 +9,14 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MaterialModule } from '../../material/material.module';
+import { MatDialog } from '@angular/material/dialog';
+import { RoomDialogComponent } from './room-dialog/room-dialog.component';
 
 @Component({
     selector: 'app-room',
     imports: [
+    MaterialModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
@@ -34,16 +38,16 @@ export class RoomComponent {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
     
     private roomService = inject(RoomService);
+    private dialog = inject(MatDialog);
 
     private rooms: RoomModel[] = [];
 
     ngOnInit(): void {
-        this.roomService.findAll().subscribe(data => {
-            this.rooms = data;
-            if (this.sort && this.paginator) {
-                this.setDataSource();
-            }
-        });
+        this.roomService.findAll().subscribe(data => this.createTable(data) );
+    }
+
+    createTable(data: RoomModel[]) {
+    this.dataSource = new MatTableDataSource(data);
     }
 
     ngAfterViewInit(): void {
@@ -60,5 +64,13 @@ export class RoomComponent {
 
     applyFilter(event: any) {
         this.dataSource.filter = event.target.value;
+    }
+
+    openDigalog(room?: RoomModel){
+        this.dialog.open(RoomDialogComponent), {
+            width: '450px',
+            data: room,
+            disableClose: true
+        };
     }
 }
