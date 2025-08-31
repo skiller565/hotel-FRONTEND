@@ -10,7 +10,6 @@
         <mat-form-field class="example-full-width">
             <mat-label>CheckIn Date</mat-label>
             <input matInput [matDatepicker]="checkinPicker" [(ngModel)]="reservation.checkInDate" name="checkInDate">
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="checkinPicker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
@@ -19,7 +18,6 @@
         <mat-form-field class="example-full-width">
             <mat-label>checkOut Date</mat-label>
             <input matInput [matDatepicker]="checkoutPicker" [(ngModel)]="reservation.checkOutDate" name="checkOutDate"> 
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>

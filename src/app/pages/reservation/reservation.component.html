@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label>Filter</mat-label>
+  <mat-label>Filter Reservation</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Suite" #input>
 </mat-form-field>
 
@@ -23,7 +23,7 @@
 
     <ng-container matColumnDef="roomId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Room </th>
-      <td mat-cell *matCellDef="let row"> {{row.roomId}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.roomNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
