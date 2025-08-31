@@ -8,7 +8,7 @@
             }
         </button>
 
-        <span>MEDIAPP</span>
+        <span>HOTEL</span>
 
         <span class="example-spacer"></span>
 
@@ -31,7 +31,7 @@
     <mat-sidenav-container class="example-sidenav-container">
         <mat-sidenav #sidenav style="width: 250px" mode="push">
 
-            <img src="mitocode.png" width="128" style="margin-left: 20px">
+            <img src="image.jpg" width="128" style="margin-left: 20px">
 
 
             <!--@for (m of menus; track $index) {
@@ -52,33 +52,15 @@
             </button>
             <mat-divider></mat-divider>
             <button class="myButton"  mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/consult-wizard" >
-                <mat-icon>view_carousel</mat-icon>
-                <span>Register Consult W.</span>
+                routerLink="/pages/room" >
+                <mat-icon>view_comfy</mat-icon>
+                <span>Register room</span>
             </button>
             <mat-divider></mat-divider>
             <button class="myButton" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/specialty" >
-                <mat-icon>star_rate</mat-icon>
-                <span>Specialty</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button class="myButton"  mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/medic" >
-                <mat-icon>healing</mat-icon>
-                <span>Medic</span>
-            </button>
-            <mat-divider></mat-divider>            
-            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" 
-                routerLink="/pages/exam" >
-                <mat-icon>assignment</mat-icon>
-                <span>Exam</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button class="myButton" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/patient">
-                <mat-icon>accessibility</mat-icon>
-                <span>Patient</span>
+                routerLink="/pages/reservation" >
+                <mat-icon>view_agenda</mat-icon>
+                <span>Register reservation</span>
             </button>
             <mat-divider></mat-divider>
             <button class="myButton" mat-menu-item (click)="sidenav.toggle()"
@@ -91,7 +73,7 @@
 
         <mat-sidenav-content>
 
-            <!--router-outlet />-->
+            <router-outlet></router-outlet>
 
         </mat-sidenav-content>
 

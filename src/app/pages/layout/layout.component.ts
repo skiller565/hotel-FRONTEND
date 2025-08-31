@@ -4,12 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router, RouterLink } from '@angular/router'; 
+import { Router, RouterLink, RouterOutlet } from '@angular/router'; 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { RoomComponent } from '../room/room.component';
 
 @Component({
   selector: 'app-layout',
@@ -25,8 +26,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
-    MatDividerModule
-    ],
+    MatDividerModule,
+    RouterOutlet
+],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })

@@ -1,0 +1,20 @@
+<mat-dialog-content>
+    <mat-toolbar>
+        <span>Reservation Info</span>
+    </mat-toolbar>
+
+    <div class="example-container">
+        <mat-form-field>
+            <input matInput placeholder="Customer name" [(ngModel)]="reservation.customerName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="checkIn Date" [(ngModel)]="reservation.checkInDate">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="checkOut Date" [(ngModel)]="reservation.checkOutDate">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Room" [(ngModel)]="reservation.roomId">
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
