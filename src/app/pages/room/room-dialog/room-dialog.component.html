@@ -12,8 +12,20 @@
         <mat-form-field>
             <input matInput placeholder="Price" [(ngModel)]="room.price">
         </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Available" [(ngModel)]="room.available">
-        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="room.available">
+            Available
+        </mat-slide-toggle>
+
+        <div class="actions">
+            <button mat-flat-button (click)="operate()">
+                <span>OK</span>
+                <mat-icon>done</mat-icon>
+            </button>
+
+            <button mat-flat-button class="cancel" (click)="close()">
+                <span>Cancel</span>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </div>
     </div>
 </mat-dialog-content>

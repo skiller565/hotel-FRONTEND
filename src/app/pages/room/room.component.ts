@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MaterialModule } from '../../material/material.module';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RoomDialogComponent } from './room-dialog/room-dialog.component';
 
 @Component({
@@ -39,27 +40,20 @@ export class RoomComponent {
     
     private roomService = inject(RoomService);
     private dialog = inject(MatDialog);
+    private snackbar = inject(MatSnackBar);
 
     private rooms: RoomModel[] = [];
 
     ngOnInit(): void {
         this.roomService.findAll().subscribe(data => this.createTable(data) );
+        this.roomService.getRoomChange().subscribe(data => this.createTable(data));
+        this.roomService.getMessageChange().subscribe(msg => this.snackbar.open(msg, 'INFO', { duration: 2000}));
     }
 
     createTable(data: RoomModel[]) {
-    this.dataSource = new MatTableDataSource(data);
-    }
-
-    ngAfterViewInit(): void {
-        if (this.rooms.length) {
-            this.setDataSource();
-        }
-    }
-
-    setDataSource() {
-        this.dataSource = new MatTableDataSource(this.rooms);
-        this.dataSource.sort = this.sort;
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     }
 
     applyFilter(event: any) {
@@ -67,10 +61,10 @@ export class RoomComponent {
     }
 
     openDigalog(room?: RoomModel){
-        this.dialog.open(RoomDialogComponent), {
+        this.dialog.open(RoomDialogComponent, {
             width: '450px',
             data: room,
             disableClose: true
-        };
+        });
     }
 }

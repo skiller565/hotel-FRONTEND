@@ -7,14 +7,45 @@
         <mat-form-field>
             <input matInput placeholder="Customer name" [(ngModel)]="reservation.customerName">
         </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="checkIn Date" [(ngModel)]="reservation.checkInDate">
+        <mat-form-field class="example-full-width">
+            <mat-label>CheckIn Date</mat-label>
+            <input matInput [matDatepicker]="checkinPicker" [(ngModel)]="reservation.checkInDate" name="checkInDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="checkinPicker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #checkinPicker></mat-datepicker>
         </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="checkOut Date" [(ngModel)]="reservation.checkOutDate">
+        <mat-form-field class="example-full-width">
+            <mat-label>checkOut Date</mat-label>
+            <input matInput [matDatepicker]="checkoutPicker" [(ngModel)]="reservation.checkOutDate" name="checkOutDate"> 
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #checkoutPicker></mat-datepicker>
         </mat-form-field>
+
         <mat-form-field>
-            <input matInput placeholder="Room" [(ngModel)]="reservation.roomId">
+            <mat-label>Room</mat-label>
+            <mat-select [(ngModel)]="reservation.roomId">
+                @for (r of rooms; track $index) {
+                    <mat-option [value]="r.id">{{r.number}}</mat-option>
+                }
+            </mat-select>
         </mat-form-field>
+
+        <div class="actions">
+            <button mat-flat-button (click)="operate()">
+                <span>OK</span>
+                <mat-icon>done</mat-icon>
+            </button>
+
+            <button mat-flat-button class="cancel" (click)="close()">
+                <span>Cancel</span>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </div>
+
     </div>
 </mat-dialog-content>
