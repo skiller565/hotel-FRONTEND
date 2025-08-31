@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReservationModel } from '../../model/reservation';
 import { MaterialModule } from '../../material/material.module';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
 
 @Component({
@@ -39,38 +40,32 @@ export class ReservationComponent {
   
   private reservationService = inject(ReservationService);
   private dialog = inject(MatDialog);
+  private snackbar = inject(MatSnackBar);
+
   private reservations: ReservationModel[] = [];
 
   ngOnInit(): void {
     this.reservationService.findAll().subscribe(data => this.createTable(data));
+    this.reservationService.getReservationChange().subscribe(data => this.createTable(data));
+    this.reservationService.getMessageChange().subscribe(msg => this.snackbar.open(msg, 'INFO', { duration: 2000}));
   }
 
   createTable(data: ReservationModel[]) {
     this.dataSource = new MatTableDataSource(data);
-  }
-
-  ngAfterViewInit(): void {
-    if (this.reservations.length) {
-        this.setDataSource();
-    }
-  }
-
-  setDataSource() {
-    this.dataSource = new MatTableDataSource(this.reservations);
-    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
-  
+
   applyFilter(event: any) {
     this.dataSource.filter = event.target.value;
   }
 
   openDigalog(reservation?: ReservationModel){
-      this.dialog.open(ReservationDialogComponent), {
+      this.dialog.open(ReservationDialogComponent, {
           width: '450px',
           data: reservation,
           disableClose: true
-      };
+      });
   }
 
 }

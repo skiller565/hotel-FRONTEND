@@ -10,15 +10,3 @@ table {
 td, th {
   width: 25%;
 }
-
-.actions {
-  display: flex;
-}
-
-.actions button {
-  margin: 2px;
-}
-
-.actions button.delete {/* Red color for delete button */
-  color: rgb(211, 53, 53);
-}
