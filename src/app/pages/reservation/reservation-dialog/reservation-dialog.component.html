@@ -5,32 +5,63 @@
 
     <div class="example-container">
         <mat-form-field>
-            <input matInput placeholder="Customer name" [(ngModel)]="reservation.customerName">
+            <input matInput placeholder="Customer name" [(ngModel)]="reservation.customerName"  name="customerName" #customerName="ngModel" required minlength="3" >        
+            @if (customerName.invalid && customerName.touched) {
+                <small class="text-danger">
+                @if (customerName.errors?.['required']) {
+                    El campo es obligatorio.
+                }
+                @if (customerName.errors?.['minlength']) {
+                    El campo debe tener al menos 4 caracteres.
+                }
+                </small>
+            }
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>CheckIn Date</mat-label>
-            <input matInput [matDatepicker]="checkinPicker" [(ngModel)]="reservation.checkInDate" name="checkInDate">
+            <input matInput [matDatepicker]="checkinPicker" [(ngModel)]="reservation.checkInDate" name="checkInDate" #checkInDate="ngModel" required>
             <mat-datepicker-toggle matIconSuffix [for]="checkinPicker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #checkinPicker></mat-datepicker>
+            @if (checkInDate.invalid && checkInDate.touched) {
+                <small class="text-danger">
+                @if (checkInDate.errors?.['required']) {
+                    El campo es obligatorio.
+                }
+                </small>
+            }
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>checkOut Date</mat-label>
-            <input matInput [matDatepicker]="checkoutPicker" [(ngModel)]="reservation.checkOutDate" name="checkOutDate"> 
+            <input matInput [matDatepicker]="checkoutPicker" [(ngModel)]="reservation.checkOutDate" name="checkOutDate"  #checkOutDate="ngModel" required> 
             <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #checkoutPicker></mat-datepicker>
+            @if (checkOutDate.invalid && checkOutDate.touched) {
+                <small class="text-danger">
+                @if (checkOutDate.errors?.['required']) {
+                    El campo es obligatorio.
+                }
+                </small>
+            }
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Room</mat-label>
-            <mat-select [(ngModel)]="reservation.roomId">
+            <mat-select [(ngModel)]="reservation.roomId" name="selectRoom"  #selectRoom="ngModel" required>
                 @for (r of rooms; track $index) {
                     <mat-option [value]="r.id">{{r.number}}</mat-option>
                 }
             </mat-select>
+            @if (selectRoom.invalid && selectRoom.touched) {
+                <small class="text-danger">
+                @if (selectRoom.errors?.['required']) {
+                    El campo es obligatorio.
+                }
+                </small>
+            }
         </mat-form-field>
 
         <div class="actions">

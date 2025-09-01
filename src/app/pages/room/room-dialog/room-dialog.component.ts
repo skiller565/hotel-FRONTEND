@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MaterialModule } from '../../../material/material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { switchMap, tap } from 'rxjs';
+import { switchMap, tap, of, catchError } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { RoomModel } from '../../../model/room';
 import { RoomService } from '../../../services/room.service';
@@ -41,7 +41,8 @@ export class RoomDialogComponent {
       .pipe(
           switchMap( () => this.roomService.findAll()),
           tap(data => this.roomService.setRoomChange(data)),
-          tap( () => this.roomService.setMessageChange('UPDATED!') )
+          tap( () => this.roomService.setMessageChange('UPDATED!') ),
+          catchError(this.handleError('update'))
       )
       .subscribe();
       this.close();
@@ -50,7 +51,8 @@ export class RoomDialogComponent {
       .pipe(
           switchMap( () => this.roomService.findAll()),
           tap(data => this.roomService.setRoomChange(data)),
-          tap( () => this.roomService.setMessageChange('CREATED!') )
+          tap( () => this.roomService.setMessageChange('CREATED!') ),
+          catchError(this.handleError('create'))
       )
       .subscribe();
 
@@ -61,4 +63,12 @@ export class RoomDialogComponent {
   close() {
     this.dialogRef.close();
   }
+
+  private handleError(operation: string) {
+  return (err: any) => {
+    const errorMessage = err?.error?.message || `Unexpected error during ${operation}`;
+    this.roomService.setMessageChange(`ERROR: ${errorMessage}`);
+    return of(); 
+  };
+}
 }

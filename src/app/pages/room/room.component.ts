@@ -13,6 +13,7 @@ import { MaterialModule } from '../../material/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RoomDialogComponent } from './room-dialog/room-dialog.component';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
     selector: 'app-room',
@@ -66,5 +67,14 @@ export class RoomComponent {
             data: room,
             disableClose: true
         });
+    }
+
+    delete(id: number){
+    this.roomService.delete(id).pipe(
+        switchMap( ()=> this.roomService.findAll()),
+        tap(data => this.roomService.setRoomChange(data)),
+        tap(() => this.roomService.setMessageChange('DELETED!'))
+    )
+    .subscribe();
     }
 }
