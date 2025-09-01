@@ -13,6 +13,7 @@ import { MaterialModule } from '../../material/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reservation',
@@ -66,6 +67,15 @@ export class ReservationComponent {
           data: reservation,
           disableClose: true
       });
+  }
+
+  delete(id: number){
+    this.reservationService.delete(id).pipe(
+      switchMap( ()=> this.reservationService.findAll()),
+      tap(data => this.reservationService.setReservationChange(data)),
+      tap(() => this.reservationService.setMessageChange('DELETED!'))
+    )
+    .subscribe();
   }
 
 }
